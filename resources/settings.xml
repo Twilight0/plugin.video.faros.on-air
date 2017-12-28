@@ -1,0 +1,5 @@
+<settings>
+    <category label="Misc">
+        <setting label="30015" type="action" action="RunPlugin(plugin://$ID/?action=cache_clear)"/>
+    </category>
+</settings>
