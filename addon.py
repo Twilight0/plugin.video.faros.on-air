@@ -76,6 +76,10 @@ elif action == 'check_updates':
     from resources.lib import helpers
     helpers.check_updates()
 
+elif action == 'android_activity':
+    from resources.lib import helpers
+    helpers.android_activity(url)
+
 elif action == 'weather':
     from resources.lib import helpers
     helpers.weather()

@@ -72,3 +72,8 @@ def checkpoint():
         control.setSetting('first_time', 'false')
     else:
         pass
+
+
+def android_activity(url):
+
+    control.execute('StartAndroidActivity(com.google.android.webview,android.intent.action.VIEW,{0})'.format(url))

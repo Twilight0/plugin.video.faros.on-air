@@ -114,6 +114,26 @@ msgctxt "#30025"
 msgid "Weather"
 msgstr ""
 
+msgctxt "#30026"
+msgid "Follow us on Twitter"
+msgstr ""
+
+msgctxt "#30027"
+msgid "Subscribe to our channel on Youtube"
+msgstr ""
+
+msgctxt "#30028"
+msgid "Like us on Facebook"
+msgstr ""
+
+msgctxt "#30029"
+msgid "Follow us on Instagram"
+msgstr ""
+
+msgctxt "#30030"
+msgid "Our Website"
+msgstr ""
+
 msgctxt "#30402
 msgid "Success"
 msgstr ""

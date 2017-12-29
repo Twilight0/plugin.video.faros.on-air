@@ -29,10 +29,10 @@ class Main:
     def __init__(self):
 
         self.list = []; self.data = []
-        self.live_url = 'http://master.cystreams.com:25461/live/faros/farostv/154.m3u8'
         self.main_youtube_id = 'UCfU04d4DbqpyotwfgxRS6EQ'
         self.main_playlist_id = 'UUfU04d4DbqpyotwfgxRS6EQ'
         self.yt_key = b64decode('QUl6YVN5QThrMU95TEdmMDNIQk5sMGJ5RDUxMWpyOWNGV28yR1I0')  # please do not copy this key
+        self.live_url = 'http://master.cystreams.com:25461/live/faros/farostv/154.m3u8'
 
     def root(self):
 
@@ -40,89 +40,123 @@ class Main:
             {
                 'title': control.lang(30001),
                 'action': 'play',
-                'url': self.live_url,
-                'icon': 'live.jpg',
                 'isFolder': 'False',
+                'url': self.live_url,
+                'icon': 'live.jpg'
             }
             ,
             {
                 'title': control.lang(30002),
                 'action': 'videos',
-                'icon': 'youtube.png',
+                'icon': 'youtube.png'
             }
             ,
             {
                 'title': control.lang(30003),
                 'action': 'playlist',
                 'url': 'PL0cttCfQzkdtUFNDIHozh_EpVSUYwCVuI',
-                'icon': 'newspapers.png',
+                'icon': 'newspapers.png'
             }
             ,
             {
                 'title': control.lang(30004),
                 'action': 'playlist',
                 'url': 'PL0cttCfQzkduInQQt3nCEKYValRROk1AV',
-                'icon': 'users.png',
+                'icon': 'users.png'
             }
             ,
             {
                 'title': control.lang(30005),
                 'action': 'playlist',
                 'url': 'PL0cttCfQzkdskGTTd3pLvUVKmlK8UyK3J',
-                'icon': 'diet.png',
+                'icon': 'diet.png'
             }
             ,
             {
                 'title': control.lang(30006),
                 'action': 'playlist',
                 'url': 'PL0cttCfQzkdve608IsDG2jHqQ2AwAB4rm',
-                'icon': 'sports.png',
+                'icon': 'sports.png'
             }
             ,
             {
                 'title': control.lang(30007),
                 'action': 'playlist',
                 'url': 'PL0cttCfQzkduVZzwQZyAXOgkL_2CRCBlC',
-                'icon': 'culture.png',
+                'icon': 'culture.png'
             }
             ,
             {
                 'title': control.lang(30008),
                 'action': 'playlist',
                 'url': 'PL0cttCfQzkdsgy5MDvGyl_Qsw7bKKq7V9',
-                'icon': 'events.png',
+                'icon': 'events.png'
             }
             ,
             {
                 'title': control.lang(30009),
                 'action': 'playlist',
                 'url': 'PL0cttCfQzkdvjJGEFQsNvQSOXaFA6jFde',
-                'icon': 'world.png',
+                'icon': 'world.png'
             }
             ,
             {
                 'title': control.lang(30010),
                 'action': 'playlist',
                 'url': 'PL0cttCfQzkdtnlBmYgZM75dVPbN3V6YsP',
-                'icon': 'doctor.png',
+                'icon': 'doctor.png'
             }
             ,
             {
                 'title': control.lang(30013),
                 'action': 'bookmarks',
-                'icon': 'bookmarks.png',
+                'icon': 'bookmarks.png'
             }
             ,
             {
                 'title': control.lang(30017),
                 'action': 'search',
-                'icon': 'search.png',
+                'icon': 'search.png'
             }
             ,
             {
                 'title': control.lang(30025),
                 'action': 'weather',
-                'icon': 'weather.png',
+                'icon': 'weather.png'
+            }
+            ,
+            {
+                'title': control.lang(30030),
+                'action': 'android_activity',
+                'url': 'https://farosonair.com/'
+            }
+            ,
+            {
+                'title': control.lang(30028),
+                'action': 'android_activity',
+                'icon': 'facebook.png',
+                'url': 'https://www.facebook.com/farosonair'
+            }
+            ,
+            {
+                'title': control.lang(30029),
+                'action': 'android_activity',
+                'icon': 'instagram.png',
+                'url': 'https://www.instagram.com/farosonair16/'
+            }
+            ,
+            {
+                'title': control.lang(30026),
+                'action': 'android_activity',
+                'icon': 'twitter.png',
+                'url': 'https://twitter.com/faros_on_air'
+            }
+            ,
+            {
+                'title': control.lang(30027),
+                'action': 'android_activity',
+                'icon': 'youtube_sub.png',
+                'url': 'https://www.youtube.com/channel/UCfU04d4DbqpyotwfgxRS6EQ?sub_confirmation=1'
             }
             ,
             {

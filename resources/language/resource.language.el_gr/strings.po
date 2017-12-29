@@ -114,6 +114,26 @@ msgctxt "#30025"
 msgid "Weather"
 msgstr "Καιρός"
 
+msgctxt "#30026"
+msgid "Follow us on Twitter"
+msgstr "Ακολουθήστε μας στο Twitter"
+
+msgctxt "#30027"
+msgid "Subscribe to our channel on Youtube"
+msgstr "Κάντε εγγραφή στο Youtube"
+
+msgctxt "#30028"
+msgid "Like us on Facebook"
+msgstr "Κάνετέ μας like στο Facebook"
+
+msgctxt "#30029"
+msgid "Follow us on Instagram"
+msgstr "Ακολουθήστε μας στο Instagram"
+
+msgctxt "#30030"
+msgid "Our Website"
+msgstr "Η ιστοσελίδα μας"
+
 msgctxt "#30402
 msgid "Success"
 msgstr "Επιτυχία"
