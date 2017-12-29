@@ -59,3 +59,15 @@ elif action == 'addBookmark':
 elif action == 'deleteBookmark':
     from tulip import bookmarks
     bookmarks.delete(url)
+
+elif action == 'quit_kodi':
+    from resources.lib import helpers
+    helpers.quit_kodi()
+
+elif action == 'lang_choice':
+    from resources.lib import helpers
+    helpers.lang_choice()
+
+elif action == 'refresh':
+    from resources.lib import helpers
+    helpers.refresh()

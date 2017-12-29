@@ -82,6 +82,26 @@ msgctxt "#30017"
 msgid "Search"
 msgstr "Αναζήτηση"
 
+msgctxt "#30018"
+msgid "Quit"
+msgstr "Έξοδος"
+
+msgctxt "#30019"
+msgid "Language Selector"
+msgstr "Επιλογέας γλώσσας"
+
+msgctxt "#30020"
+msgid "English"
+msgstr "Αγγλικά"
+
+msgctxt "#30021"
+msgid "Greek"
+msgstr "Ελληνικά"
+
+msgctxt "#30022"
+msgid "Refresh"
+msgstr "Ανανέωση"
+
 msgctxt "#30402
 msgid "Success"
 msgstr "Επιτυχία"

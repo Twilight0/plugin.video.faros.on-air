@@ -83,7 +83,23 @@ msgid "Search"
 msgstr ""
 
 msgctxt "#30018"
-msgid "Please type with Greek letters"
+msgid "Quit"
+msgstr ""
+
+msgctxt "#30019"
+msgid "Language Selector"
+msgstr ""
+
+msgctxt "#30020"
+msgid "English"
+msgstr ""
+
+msgctxt "#30021"
+msgid "Greek"
+msgstr ""
+
+msgctxt "#30022"
+msgid "Refresh"
 msgstr ""
 
 msgctxt "#30402

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.faros.on-air" name="Faros On-Air" version="1.0.0" provider-name="Twilight0">
+<addon id="plugin.video.faros.on-air.standalone" name="Faros On-Air" version="1.0.0" provider-name="Twilight0">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
         <import addon="plugin.video.youtube" version="5.4.0"/>
@@ -18,6 +18,17 @@
         <size>133900</size>
         <website>https://farosonair.com/</website>
         <source>https://github.com/Twilight0/plugin.video.faros.on-air</source>
+    </extension>
+    <extension name="Faros On Air Repo" point="xbmc.addon.repository">
+        <info compressed="false">http://alivegr.net/repo/_faros/addons.xml</info>
+        <checksum>http://alivegr.net/repo/_faros/addons.xml.md5</checksum>
+        <datadir zip="true">http://alivegr.net/repo/_faros/</datadir>
+        <hashes>false</hashes>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/Twilight0/repo.twilight0.libs/master/_zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/Twilight0/repo.twilight0.libs/master/_zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/Twilight0/repo.twilight0.libs/master/_zips/</datadir>
+        </dir>
     </extension>
     <news>
 18-12-2017 - [B]1.0.0[/B]

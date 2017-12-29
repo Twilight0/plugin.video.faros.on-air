@@ -123,11 +123,18 @@ class Main:
                 'action': 'settings',
                 'icon': 'settings.png',
             }
+            ,
+            {
+                'title': control.lang(30018),
+                'action': 'quit_kodi',
+                'icon': 'quit.png',
+            }
         ]
 
         for item in self.list:
             cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
-            item.update({'cm': [cache_clear]})
+            refresh_cm = {'title': 30022, 'query': {'action': 'refresh'}}
+            item.update({'cm': [cache_clear, refresh_cm]})
 
         directory.add(self.list)
 
