@@ -1,6 +1,7 @@
 <settings>
     <category label="General">
         <setting label="30019" type="action" action="RunPlugin(plugin://$ID/?action=lang_choice)"/>
+        <setting label="30023" type="action" action="RunPlugin(plugin://$ID/?action=check_updates)"/>
         <setting label="30015" type="action" action="RunPlugin(plugin://$ID/?action=cache_clear)"/>
         <setting id="first_time" label="First Time" type="bool" default="true" visible="false"/>
     </category>

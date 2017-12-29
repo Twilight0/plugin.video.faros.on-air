@@ -18,7 +18,7 @@
         along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from tulip import control
+from tulip import control, cache
 
 
 def quit_kodi():
@@ -46,3 +46,29 @@ def lang_choice():
 def refresh():
 
     control.execute('Container.Refresh')
+
+
+def cache_clear():
+
+    cache.clear(withyes=False)
+    control.infoDialog(control.lang(30402))
+
+
+def weather():
+
+    control.execute('ActivateWindow(weather,return)')
+
+
+def check_updates():
+
+    control.execute('UpdateAddonRepos')
+    control.okDialog(heading=control.addonInfo('name'), line1=control.lang(30402))
+
+
+def checkpoint():
+
+    if control.setting('first_time') == 'true':
+        control.okDialog(heading=control.addonInfo('name'), line1=control.lang(30024))
+        control.setSetting('first_time', 'false')
+    else:
+        pass

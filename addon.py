@@ -41,8 +41,8 @@ elif action == 'settings':
     control.openSettings()
 
 elif action == 'cache_clear':
-    from tulip import cache
-    cache.clear(withyes=False)
+    from resources.lib import helpers
+    helpers.cache_clear()
 
 elif action == 'bookmarks':
     from resources.lib import navigator
@@ -71,3 +71,11 @@ elif action == 'lang_choice':
 elif action == 'refresh':
     from resources.lib import helpers
     helpers.refresh()
+
+elif action == 'check_updates':
+    from resources.lib import helpers
+    helpers.check_updates()
+
+elif action == 'weather':
+    from resources.lib import helpers
+    helpers.weather()

@@ -21,6 +21,7 @@
 import json
 from base64 import b64decode
 from tulip import control, directory, youtube, cache, bookmarks, cleantitle
+from helpers import checkpoint
 
 
 class Main:
@@ -119,6 +120,12 @@ class Main:
             }
             ,
             {
+                'title': control.lang(30025),
+                'action': 'weather',
+                'icon': 'weather.png',
+            }
+            ,
+            {
                 'title': control.lang(30012),
                 'action': 'settings',
                 'icon': 'settings.png',
@@ -137,6 +144,8 @@ class Main:
             item.update({'cm': [cache_clear, refresh_cm]})
 
         directory.add(self.list)
+        control.wait(timeout=2)
+        checkpoint()
 
     def video_list(self):
 
