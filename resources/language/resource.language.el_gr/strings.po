@@ -55,8 +55,8 @@ msgid "Science"
 msgstr "Επιστημονικά"
 
 msgctxt "#30011"
-msgid "Add to bookmarks"
-msgstr "Προσθήκη στους σελιδοδείκτες"
+msgid ""
+msgstr ""
 
 msgctxt "#30012"
 msgid "Tools"
@@ -67,8 +67,8 @@ msgid "Bookmarks"
 msgstr "Σελιδοδείκτες"
 
 msgctxt "#30014"
-msgid "Remove from bookmarks"
-msgstr "Αφαίρεση από τους σελιδοδείκτες"
+msgid ""
+msgstr ""
 
 msgctxt "#30015"
 msgid "Clear function cache"
@@ -107,32 +107,48 @@ msgid "Check for updates"
 msgstr "Έλεγχος ενημερώσεων"
 
 msgctxt "#30024"
-msgid "You can choose desired language in the tools section"
-msgstr "Μπορείτε να διαλέξετε γλώσσα στα εργαλεία"
+msgid "You can change language in the tools section at any time"
+msgstr "Μπορείτε να αλλάξετε γλώσσα στα εργαλεία οποιαδήποτε άλλη στιγμή"
 
 msgctxt "#30025"
 msgid "Weather"
 msgstr "Καιρός"
 
 msgctxt "#30026"
-msgid "Follow us on Twitter"
-msgstr "Ακολουθήστε μας στο Twitter"
+msgid "Twitter"
+msgstr "Twitter"
 
 msgctxt "#30027"
-msgid "Subscribe to our channel on Youtube"
-msgstr "Κάντε εγγραφή στο Youtube"
+msgid "Youtube Channel"
+msgstr "Κανάλι Youtube"
 
 msgctxt "#30028"
-msgid "Like us on Facebook"
-msgstr "Κάνετέ μας like στο Facebook"
+msgid "Facebook Page"
+msgstr "Σελίδα Facebook"
 
 msgctxt "#30029"
-msgid "Follow us on Instagram"
-msgstr "Ακολουθήστε μας στο Instagram"
+msgid "Instagram"
+msgstr "Instagram"
 
 msgctxt "#30030"
 msgid "Our Website"
 msgstr "Η ιστοσελίδα μας"
+
+msgctxt "#30031"
+msgid "Force list view for videos"
+msgstr "Επιβολή όψεως λίστας για τα βίντεο"
+
+msgctxt "#30032"
+msgid "External links"
+msgstr "Εξωτερικοί σύνδεσμοι"
+
+msgctxt "#30033"
+msgid "Show External links in directory mode"
+msgstr "Δείξε τους εξωτερικούς συνδέσμους σε μορφή καταλόγου"
+
+msgctxt "#30034"
+msgid "Browser of choice"
+msgstr "Επιλογή φυλλομετρητή"
 
 msgctxt "#30402
 msgid "Success"

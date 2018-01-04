@@ -18,9 +18,22 @@
         along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from tulip import directory
+from xbmc import executebuiltin, translatePath
+from xbmcvfs import exists
 
+_id_ = 'plugin.video.faros.on-air.standalone'
 
-def play(url):
+executebuiltin('RunAddon({0})'.format(_id_))
 
-    directory.resolve(url)
+if exists(translatePath('special://home/addons/{0}/addon.xml'.format(_id_))) and exists(translatePath('special://profile/keymaps/farosonair.xml')):
+
+    with open(translatePath('special://profile/keymaps/farosonair.xml'), 'r') as f:
+        keymap_file = f.read()
+
+    if 'home' not in keymap_file:
+        with open(translatePath('special://profile/keymaps/farosonair.xml'), 'w') as f:
+            f.write(keymap_file.replace('xbmc', 'home'))
+
+else:
+
+    pass

@@ -26,21 +26,119 @@ def quit_kodi():
     control.execute('Quit')
 
 
+def set_a_setting(setting, value):
+
+    json_cmd = {
+        "jsonrpc": "2.0", "method": "Settings.SetSettingValue", "params": {"setting": setting, "value": value}, "id": 1
+    }
+
+    control.json_rpc(json_cmd)
+
+
 def lang_choice():
 
-    english = '{"jsonrpc":"2.0", "method": "Settings.SetSettingValue", "params": {"setting": "locale.language", "value": "resource.language.en_gb"}, "id": 1}'
-    greek = '{"jsonrpc":"2.0", "method": "Settings.SetSettingValue", "params": {"setting": "locale.language", "value": "resource.language.el_gr"}, "id": 1}'
+    def set_other_options():
+
+        set_a_setting('locale.longdateformat', 'regional')
+        set_a_setting('locale.shortdateformat', 'regional')
+        set_a_setting('locale.speedunit', 'regional')
+        set_a_setting('locale.temperatureunit', 'regional')
+        set_a_setting('locale.timeformat', 'regional')
+        # set_a_setting('locale.timezone', 'default')
+        # set_a_setting('locale.timezonecountry', 'default')
+        set_a_setting('locale.use24hourclock', 'regional')
 
     selections = [control.lang(30020), control.lang(30021)]
 
     dialog = control.selectDialog(selections)
 
     if dialog == 0:
-        control.jsonrpc(english)
+        set_a_setting('locale.language', 'resource.language.en_gb')
+        set_other_options()
     elif dialog == 1:
-        control.jsonrpc(greek)
+        set_a_setting('locale.language', 'resource.language.el_gr')
+        set_other_options()
     else:
         control.execute('Dialog.Close(all)')
+
+    control.sleep(100)
+    refresh()
+
+
+def weather_set_up():
+
+    addon_settings = '''<settings>
+    <setting id="Location1" value="Paphos (CY)" />
+    <setting id="Location1id" value="841589" />
+    <setting id="Location2" value="" />
+    <setting id="Location2id" value="" />
+    <setting id="Location3" value="" />
+    <setting id="Location3id" value="" />
+    <setting id="Location4" value="" />
+    <setting id="Location4id" value="" />
+    <setting id="Location5" value="" />
+    <setting id="Location5id" value="" />
+</settings>
+'''
+
+    location = control.transPath('special://profile/addon_data/weather.yahoo')
+    if not control.exists(location):
+        control.makeFile(location)
+
+    with open(control.join(location, 'settings.xml'), mode='w') as f:
+        f.write(addon_settings)
+
+    set_a_setting('weather.addon', 'weather.yahoo')
+    set_a_setting('weather.currentlocation', 1)
+    control.execute('Weather.Refresh')
+
+
+def key_map_setup():
+
+    if control.exists(control.transPath('special://home/addons/plugin.video.faros.on-air.standalone/addon.xml')):
+        script_location = 'special://home/addons/plugin.video.faros.on-air.standalone/resources/lib/key_nav.py'
+    else:
+        script_location = 'special://xbmc/addons/plugin.video.faros.on-air.standalone/resources/lib/key_nav.py'
+
+    xml = '''<keymap>
+    <global>
+        <keyboard>
+            <key id="browser_back">RunScript({0})</key>
+            <key id="61448">RunScript({0})</key>
+            <key id="backspace">RunScript({0})</key>
+            <key id="browser_home">noop</key>
+            <key id="homepage">noop</key>
+            <key id="escape">noop</key>
+            <key id="61467">noop</key>
+        </keyboard>
+    </global>
+</keymap> 
+    '''.format(script_location)
+
+    location = control.transPath('special://profile/keymaps/')
+
+    if not control.exists(location):
+        control.makeFile(location)
+
+    with open(control.join(location, 'farosonair.xml'), mode='w') as f:
+        f.write(xml)
+
+    control.execute('Action(reloadkeymaps)')
+
+
+def youtube_set_up():
+
+    _id_ = '498788153161-pe356urhr0uu2m98od6f72k0vvcdsij0.apps.googleusercontent.com'
+    key = 'AIzaSyA8k1OyLGf03HBNl0byD511jr9cFWo2GR4'
+    secret = 'e6RBIFCVh1Fm-IX87PVJjgUu'
+
+    control.addon('plugin.video.youtube').setSetting('youtube.api.enable', 'true')
+    control.addon('plugin.video.youtube').setSetting('youtube.api.id', _id_)
+    control.addon('plugin.video.youtube').setSetting('youtube.api.key', key)
+    control.addon('plugin.video.youtube').setSetting('youtube.api.secret', secret)
+    control.addon('plugin.video.youtube').setSetting('kodion.setup_wizard', 'false')
+    control.addon('plugin.video.youtube').setSetting('youtube.language', 'el')
+    control.addon('plugin.video.youtube').setSetting('youtube.region', 'GR')
 
 
 def refresh():
@@ -68,12 +166,32 @@ def check_updates():
 def checkpoint():
 
     if control.setting('first_time') == 'true':
-        control.okDialog(heading=control.addonInfo('name'), line1=control.lang(30024))
+
         control.setSetting('first_time', 'false')
+        set_a_setting('general.settinglevel', 3)
+        set_a_setting('locale.keyboardlayouts', ['English QWERTY', 'Greek QWERTY'])
+        weather_set_up()
+        youtube_set_up()
+        key_map_setup()
+        lang_choice()
+        control.okDialog(heading=control.addonInfo('name'), line1=control.lang(30024))
+
     else:
+
         pass
 
 
 def android_activity(url):
 
-    control.execute('StartAndroidActivity(com.google.android.webview,android.intent.action.VIEW,{0})'.format(url))
+    if control.setting('browser') == 'Opera Mobile':
+        browser = 'com.opera.browser'
+    elif control.setting('browser') == 'Opera Mini':
+        browser = 'com.opera.mini.native'
+    elif control.setting('browser') == 'Firefox':
+        browser = 'org.mozilla.firefox'
+    elif control.setting('browser') == 'UC Browser':
+        browser = 'com.UCMobile.intl'
+    else:
+        browser = 'com.android.chrome'
+
+    control.execute('StartAndroidActivity("{0}","android.intent.action.VIEW","","{1}")'.format(browser, url))

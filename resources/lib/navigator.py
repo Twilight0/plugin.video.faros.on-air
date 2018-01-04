@@ -18,13 +18,13 @@
         along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import json
 from base64 import b64decode
-from tulip import control, directory, youtube, cache, bookmarks, cleantitle
-from helpers import checkpoint
+from tulip import control, directory, youtube, cache, cleantitle
+from tulip.init import syshandle, sysaddon
+from helpers import checkpoint, android_activity
 
 
-class Main:
+class Indexer:
 
     def __init__(self):
 
@@ -109,8 +109,8 @@ class Main:
             ,
             {
                 'title': control.lang(30013),
-                'action': 'bookmarks',
-                'icon': 'bookmarks.png'
+                'action': 'favourites',
+                'icon': 'favourites.png'
             }
             ,
             {
@@ -126,8 +126,118 @@ class Main:
             }
             ,
             {
+                'title': control.lang(30032),
+                'action': 'external_links',
+                'icon': 'external.png'
+            }
+            ,
+            {
+                'title': control.lang(30012),
+                'action': 'settings',
+                'icon': 'settings.png',
+            }
+            ,
+            {
+                'title': control.lang(30018),
+                'action': 'quit_kodi',
+                'icon': 'quit.png',
+            }
+        ]
+
+        for item in self.list:
+            cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
+            refresh_cm = {'title': 30022, 'query': {'action': 'refresh'}}
+            item.update({'cm': [cache_clear, refresh_cm]})
+
+        control.set_view_mode('500')
+        control.sleep(50)
+        directory.add(self.list, content='videos')
+        control.wait(1)
+        checkpoint()
+
+    def video_list(self):
+
+        self.list = youtube.youtube(key=self.yt_key).videos(self.main_youtube_id)
+
+        for item in self.list:
+            item.update({'action': 'play', 'isFolder': 'False'})
+
+        return self.list
+
+    def yt_playlist(self, pid):
+
+        self.list = youtube.youtube(key=self.yt_key).playlist(pid)
+
+        for item in self.list:
+            item.update({'action': 'play', 'isFolder': 'False'})
+
+        return self.list
+
+    def videos(self):
+
+        self.list = cache.get(self.video_list, 3)
+
+        if self.list is None:
+            return
+
+        for item in self.list:
+            cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
+            item.update({'cm': [cache_clear]})
+
+        if control.setting('force_view') == 'true':
+            control.set_view_mode('50')
+        directory.add(self.list)
+
+    def playlist(self, url):
+
+        self.list = cache.get(self.yt_playlist, 3, url)
+
+        if self.list is None:
+            return
+
+        for item in self.list:
+            cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
+            item.update({'cm': [cache_clear]})
+
+        if control.setting('force_view') == 'true':
+            control.set_view_mode('50')
+        directory.add(self.list)
+
+    def search(self):
+
+        search_str = control.dialog.input(control.addonInfo('name'))
+        search_str = cleantitle.strip_accents(search_str.decode('utf-8'))
+
+        if not search_str:
+            return
+
+        self.list = self.video_list()
+        self.list = [
+            item for item in self.list if search_str.lower() in cleantitle.strip_accents(
+                item['title'].decode('utf-8')
+            ).lower()
+        ]
+
+        if not self.list:
+            return
+
+        for item in self.list:
+            cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
+            item.update({'action': 'play', 'isFolder': 'False', 'cm': [cache_clear]})
+
+        self.list = sorted(self.list, key=lambda k: k['title'].lower())
+
+        if control.setting('force_view') == 'true':
+            control.set_view_mode('50')
+        directory.add(self.list)
+
+    def external_links(self):
+
+        self.data = [
+            {
                 'title': control.lang(30030),
                 'action': 'android_activity',
+                'icon': control.addonInfo('icon'),
                 'url': 'https://farosonair.com/'
             }
             ,
@@ -158,122 +268,37 @@ class Main:
                 'icon': 'youtube_sub.png',
                 'url': 'https://www.youtube.com/channel/UCfU04d4DbqpyotwfgxRS6EQ?sub_confirmation=1'
             }
-            ,
-            {
-                'title': control.lang(30012),
-                'action': 'settings',
-                'icon': 'settings.png',
-            }
-            ,
-            {
-                'title': control.lang(30018),
-                'action': 'quit_kodi',
-                'icon': 'quit.png',
-            }
         ]
 
-        for item in self.list:
-            cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
-            refresh_cm = {'title': 30022, 'query': {'action': 'refresh'}}
-            item.update({'cm': [cache_clear, refresh_cm]})
+        if control.setting('external_links') == 'false':
 
-        directory.add(self.list)
-        control.wait(timeout=2)
-        checkpoint()
+            links = [i['url'] for i in self.data]
+            titles = [i['title'] for i in self.data]
 
-    def video_list(self):
+            choice = control.selectDialog(titles)
 
-        self.list = youtube.youtube(key=self.yt_key).videos(self.main_youtube_id)
+            if choice >= 0:
 
-        for item in self.list:
-            item.update({'action': 'play', 'isFolder': 'False'})
+                android_activity(links[choice])
 
-        return self.list
+            else:
 
-    def yt_playlist(self, pid):
+                pass
 
-        self.list = youtube.youtube(key=self.yt_key).playlist(pid)
+        else:
 
-        for item in self.list:
-            item.update({'action': 'play', 'isFolder': 'False'})
+            for i in self.data:
 
-        return self.list
+                if i['icon'] != control.addonInfo('icon'):
+                    image = control.join(control.addonPath, 'resources', 'media', i['icon'])
+                else:
+                    image = control.addonInfo('icon')
 
-    def videos(self):
+                li = control.item(label=i['title'])
+                li.setArt({'poster': image, 'thumb': image, 'fanart': control.addonInfo('fanart')})
+                li.setInfo('video', {'title': i['title']})
+                url = '{0}?action={1}&url={2}'.format(sysaddon, i['action'], i['url'])
+                self.list.append((url, li, False))
 
-        self.list = cache.get(self.video_list, 3)
-
-        if self.list is None:
-            return
-
-        for item in self.list:
-            bookmark = dict((k, v) for k, v in item.iteritems() if not k == 'next')
-            bookmark['bookmark'] = item['url']
-            bm_cm = {'title': 30011, 'query': {'action': 'addBookmark', 'url': json.dumps(bookmark)}}
-            cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
-            item.update({'cm': [cache_clear, bm_cm]})
-
-        directory.add(self.list)
-
-    def playlist(self, url):
-
-        self.list = cache.get(self.yt_playlist, 3, url)
-
-        if self.list is None:
-            return
-
-        for item in self.list:
-            bookmark = dict((k, v) for k, v in item.iteritems() if not k == 'next')
-            bookmark['bookmark'] = item['url']
-            bm_cm = {'title': 30011, 'query': {'action': 'addBookmark', 'url': json.dumps(bookmark)}}
-            cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
-            item.update({'cm': [cache_clear, bm_cm]})
-
-        directory.add(self.list)
-
-    def bookmarks(self):
-
-        self.list = bookmarks.get()
-
-        if not self.list:
-            na = [{'title': 30016, 'action': None, 'icon': 'open-box.png'}]
-            directory.add(na)
-            return
-
-        for item in self.list:
-            bookmark = dict((k, v) for k, v in item.iteritems() if not k == 'next')
-            bookmark['delbookmark'] = item['url']
-            item.update({'cm': [{'title': 30014, 'query': {'action': 'deleteBookmark', 'url': json.dumps(bookmark)}}]})
-
-        self.list = sorted(self.list, key=lambda k: k['title'].lower())
-
-        directory.add(self.list)
-
-    def search(self):
-
-        search_str = control.dialog.input(control.addonInfo('name'))
-        search_str = cleantitle.strip_accents(search_str.decode('utf-8'))
-
-        self.list = self.video_list()
-        self.list = [
-            item for item in self.list if search_str.lower() in cleantitle.strip_accents(
-                item['title'].decode('utf-8')
-            ).lower()
-        ]
-
-        if not self.list:
-            return
-
-        for item in self.list:
-            item.update({'action': 'play', 'isFolder': 'False'})
-
-        for item in self.list:
-            bookmark = dict((k, v) for k, v in item.iteritems() if not k == 'next')
-            bookmark['bookmark'] = item['url']
-            bm_cm = {'title': 30011, 'query': {'action': 'addBookmark', 'url': json.dumps(bookmark)}}
-            cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
-            item.update({'cm': [cache_clear, bm_cm]})
-
-        self.list = sorted(self.list, key=lambda k: k['title'].lower())
-
-        directory.add(self.list)
+            control.addItems(syshandle, self.list)
+            control.directory(syshandle)

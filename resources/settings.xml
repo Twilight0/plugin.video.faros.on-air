@@ -1,5 +1,8 @@
 <settings>
     <category label="General">
+        <setting id="force_view" label="30031" type="bool" default="true"/>
+        <setting id="external_links" label="30033" type="bool" default="false"/>
+        <setting id="browser" label="30034" type="select" values="Chrome|Opera Mobile|Opera Mini|Firefox|UC Browser" default="Chrome"/>
         <setting label="30019" type="action" action="RunPlugin(plugin://$ID/?action=lang_choice)"/>
         <setting label="30023" type="action" action="RunPlugin(plugin://$ID/?action=check_updates)"/>
         <setting label="30015" type="action" action="RunPlugin(plugin://$ID/?action=cache_clear)"/>

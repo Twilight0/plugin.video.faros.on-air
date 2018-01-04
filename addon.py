@@ -22,15 +22,15 @@ from resources.lib import action, url
 
 if action is None:
     from resources.lib import navigator
-    navigator.Main().root()
+    navigator.Indexer().root()
 
 elif action == 'playlist':
     from resources.lib import navigator
-    navigator.Main().playlist(url)
+    navigator.Indexer().playlist(url)
 
 elif action == 'videos':
     from resources.lib import navigator
-    navigator.Main().videos()
+    navigator.Indexer().videos()
 
 elif action == 'play':
     from resources.lib import player
@@ -44,21 +44,13 @@ elif action == 'cache_clear':
     from resources.lib import helpers
     helpers.cache_clear()
 
-elif action == 'bookmarks':
-    from resources.lib import navigator
-    navigator.Main().bookmarks()
-
 elif action == 'search':
     from resources.lib import navigator
-    navigator.Main().search()
+    navigator.Indexer().search()
 
-elif action == 'addBookmark':
-    from tulip import bookmarks
-    bookmarks.add(url)
-
-elif action == 'deleteBookmark':
-    from tulip import bookmarks
-    bookmarks.delete(url)
+elif action == 'external_links':
+    from resources.lib import navigator
+    navigator.Indexer().external_links()
 
 elif action == 'quit_kodi':
     from resources.lib import helpers
@@ -83,3 +75,7 @@ elif action == 'android_activity':
 elif action == 'weather':
     from resources.lib import helpers
     helpers.weather()
+
+elif action == 'favourites':
+    from tulip import control
+    control.execute('ActivateWindow(favourites,return)')

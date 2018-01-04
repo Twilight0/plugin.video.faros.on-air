@@ -55,7 +55,7 @@ msgid "Science"
 msgstr ""
 
 msgctxt "#30011"
-msgid "Add to bookmarks"
+msgid ""
 msgstr ""
 
 msgctxt "#30012"
@@ -67,7 +67,7 @@ msgid "Bookmarks"
 msgstr ""
 
 msgctxt "#30014"
-msgid "Remove from bookmarks"
+msgid ""
 msgstr ""
 
 msgctxt "#30015"
@@ -107,7 +107,7 @@ msgid "Check for updates"
 msgstr ""
 
 msgctxt "#30024"
-msgid "You can choose desired language in the tools section"
+msgid "You can change language in the tools section at any time"
 msgstr ""
 
 msgctxt "#30025"
@@ -115,23 +115,39 @@ msgid "Weather"
 msgstr ""
 
 msgctxt "#30026"
-msgid "Follow us on Twitter"
+msgid "Twitter"
 msgstr ""
 
 msgctxt "#30027"
-msgid "Subscribe to our channel on Youtube"
+msgid "Youtube Channel"
 msgstr ""
 
 msgctxt "#30028"
-msgid "Like us on Facebook"
+msgid "Facebook Page"
 msgstr ""
 
 msgctxt "#30029"
-msgid "Follow us on Instagram"
+msgid "Instagram"
 msgstr ""
 
 msgctxt "#30030"
 msgid "Our Website"
+msgstr ""
+
+msgctxt "#30031"
+msgid "Force list view for videos"
+msgstr ""
+
+msgctxt "#30032"
+msgid "External links"
+msgstr ""
+
+msgctxt "#30033"
+msgid "Show External links in directory mode"
+msgstr ""
+
+msgctxt "#30034"
+msgid "Browser of choice"
 msgstr ""
 
 msgctxt "#30402
