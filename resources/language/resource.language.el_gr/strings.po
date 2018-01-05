@@ -55,8 +55,8 @@ msgid "Science"
 msgstr "Επιστημονικά"
 
 msgctxt "#30011"
-msgid "Add to bookmarks"
-msgstr "Προσθήκη στους σελιδοδείκτες"
+msgid ""
+msgstr ""
 
 msgctxt "#30012"
 msgid "Tools"
@@ -67,8 +67,8 @@ msgid "Bookmarks"
 msgstr "Σελιδοδείκτες"
 
 msgctxt "#30014"
-msgid "Remove from bookmarks"
-msgstr "Αφαίρεση από τους σελιδοδείκτες"
+msgid ""
+msgstr ""
 
 msgctxt "#30015"
 msgid "Clear function cache"
@@ -81,6 +81,78 @@ msgstr "Δεν βρέθηκαν σελιδοδείκτες"
 msgctxt "#30017"
 msgid "Search"
 msgstr "Αναζήτηση"
+
+msgctxt "#30018"
+msgid "Quit"
+msgstr "Έξοδος"
+
+msgctxt "#30019"
+msgid "Language Selector"
+msgstr "Επιλογέας γλώσσας"
+
+msgctxt "#30020"
+msgid "English"
+msgstr "Αγγλικά"
+
+msgctxt "#30021"
+msgid "Greek"
+msgstr "Ελληνικά"
+
+msgctxt "#30022"
+msgid "Refresh"
+msgstr "Ανανέωση"
+
+msgctxt "#30023"
+msgid "Check for updates"
+msgstr "Έλεγχος ενημερώσεων"
+
+msgctxt "#30024"
+msgid "You can change language in the tools section at any time"
+msgstr "Μπορείτε να αλλάξετε γλώσσα στα εργαλεία οποιαδήποτε άλλη στιγμή"
+
+msgctxt "#30025"
+msgid "Weather"
+msgstr "Καιρός"
+
+msgctxt "#30026"
+msgid "Twitter"
+msgstr "Twitter"
+
+msgctxt "#30027"
+msgid "Youtube Channel"
+msgstr "Κανάλι Youtube"
+
+msgctxt "#30028"
+msgid "Facebook Page"
+msgstr "Σελίδα Facebook"
+
+msgctxt "#30029"
+msgid "Instagram"
+msgstr "Instagram"
+
+msgctxt "#30030"
+msgid "Our Website"
+msgstr "Η ιστοσελίδα μας"
+
+msgctxt "#30031"
+msgid ""
+msgstr ""
+
+msgctxt "#30032"
+msgid "External links"
+msgstr "Εξωτερικοί σύνδεσμοι"
+
+msgctxt "#30033"
+msgid "Show External links in directory mode"
+msgstr "Δείξε τους εξωτερικούς συνδέσμους σε μορφή καταλόγου"
+
+msgctxt "#30034"
+msgid "Browser of choice"
+msgstr "Επιλογή φυλλομετρητή"
+
+msgctxt "#30035"
+msgid "Show exit option"
+msgstr "Δείξε την επιλογή εξόδου"
 
 msgctxt "#30402
 msgid "Success"

@@ -55,7 +55,7 @@ msgid "Science"
 msgstr ""
 
 msgctxt "#30011"
-msgid "Add to bookmarks"
+msgid ""
 msgstr ""
 
 msgctxt "#30012"
@@ -67,7 +67,7 @@ msgid "Bookmarks"
 msgstr ""
 
 msgctxt "#30014"
-msgid "Remove from bookmarks"
+msgid ""
 msgstr ""
 
 msgctxt "#30015"
@@ -83,7 +83,75 @@ msgid "Search"
 msgstr ""
 
 msgctxt "#30018"
-msgid "Please type with Greek letters"
+msgid "Quit"
+msgstr ""
+
+msgctxt "#30019"
+msgid "Language Selector"
+msgstr ""
+
+msgctxt "#30020"
+msgid "English"
+msgstr ""
+
+msgctxt "#30021"
+msgid "Greek"
+msgstr ""
+
+msgctxt "#30022"
+msgid "Refresh"
+msgstr ""
+
+msgctxt "#30023"
+msgid "Check for updates"
+msgstr ""
+
+msgctxt "#30024"
+msgid "You can change language in the tools section at any time"
+msgstr ""
+
+msgctxt "#30025"
+msgid "Weather"
+msgstr ""
+
+msgctxt "#30026"
+msgid "Twitter"
+msgstr ""
+
+msgctxt "#30027"
+msgid "Youtube Channel"
+msgstr ""
+
+msgctxt "#30028"
+msgid "Facebook Page"
+msgstr ""
+
+msgctxt "#30029"
+msgid "Instagram"
+msgstr ""
+
+msgctxt "#30030"
+msgid "Our Website"
+msgstr ""
+
+msgctxt "#30031"
+msgid ""
+msgstr ""
+
+msgctxt "#30032"
+msgid "External links"
+msgstr ""
+
+msgctxt "#30033"
+msgid "Show External links in directory mode"
+msgstr ""
+
+msgctxt "#30034"
+msgid "Browser of choice"
+msgstr ""
+
+msgctxt "#30035"
+msgid "Show exit option"
 msgstr ""
 
 msgctxt "#30402

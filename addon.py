@@ -22,15 +22,15 @@ from resources.lib import action, url
 
 if action is None:
     from resources.lib import navigator
-    navigator.Main().root()
+    navigator.Indexer().root()
 
 elif action == 'playlist':
     from resources.lib import navigator
-    navigator.Main().playlist(url)
+    navigator.Indexer().playlist(url)
 
 elif action == 'videos':
     from resources.lib import navigator
-    navigator.Main().videos()
+    navigator.Indexer().videos()
 
 elif action == 'play':
     from resources.lib import player
@@ -41,21 +41,41 @@ elif action == 'settings':
     control.openSettings()
 
 elif action == 'cache_clear':
-    from tulip import cache
-    cache.clear(withyes=False)
-
-elif action == 'bookmarks':
-    from resources.lib import navigator
-    navigator.Main().bookmarks()
+    from resources.lib import helpers
+    helpers.cache_clear()
 
 elif action == 'search':
     from resources.lib import navigator
-    navigator.Main().search()
+    navigator.Indexer().search()
 
-elif action == 'addBookmark':
-    from tulip import bookmarks
-    bookmarks.add(url)
+elif action == 'external_links':
+    from resources.lib import navigator
+    navigator.Indexer().external_links()
 
-elif action == 'deleteBookmark':
-    from tulip import bookmarks
-    bookmarks.delete(url)
+elif action == 'quit_kodi':
+    from resources.lib import helpers
+    helpers.quit_kodi()
+
+elif action == 'lang_choice':
+    from resources.lib import helpers
+    helpers.lang_choice()
+
+elif action == 'refresh':
+    from resources.lib import helpers
+    helpers.refresh()
+
+elif action == 'check_updates':
+    from resources.lib import helpers
+    helpers.check_updates()
+
+elif action == 'android_activity':
+    from resources.lib import helpers
+    helpers.android_activity(url)
+
+elif action == 'weather':
+    from resources.lib import helpers
+    helpers.weather()
+
+elif action == 'favourites':
+    from tulip import control
+    control.execute('ActivateWindow(favourites,return)')
