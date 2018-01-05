@@ -18,14 +18,21 @@
         along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from xbmc import executebuiltin, translatePath
+from xbmc import executebuiltin, translatePath, getInfoLabel
 from xbmcvfs import exists
 
-_id_ = 'plugin.video.faros.on-air.standalone'
+_id_ = 'plugin.video.faros.on-air'
 
-executebuiltin('RunAddon({0})'.format(_id_))
+if 'CEMC' in getInfoLabel('System.FriendlyName'):
+    executebuiltin('RunAddon({0})'.format(_id_))
 
-if exists(translatePath('special://home/addons/{0}/addon.xml'.format(_id_))) and exists(translatePath('special://profile/keymaps/farosonair.xml')):
+if 'CEMC' in getInfoLabel(
+    'System.FriendlyName'
+) and exists(translatePath(
+    'special://home/addons/{0}/addon.xml'.format(_id_))
+) and exists(translatePath(
+    'special://profile/keymaps/farosonair.xml')
+):
 
     with open(translatePath('special://profile/keymaps/farosonair.xml'), 'r') as f:
         keymap_file = f.read()

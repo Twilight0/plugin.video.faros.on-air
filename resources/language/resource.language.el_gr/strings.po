@@ -135,8 +135,8 @@ msgid "Our Website"
 msgstr "Η ιστοσελίδα μας"
 
 msgctxt "#30031"
-msgid "Force list view for videos"
-msgstr "Επιβολή όψεως λίστας για τα βίντεο"
+msgid ""
+msgstr ""
 
 msgctxt "#30032"
 msgid "External links"
@@ -149,6 +149,10 @@ msgstr "Δείξε τους εξωτερικούς συνδέσμους σε μ�
 msgctxt "#30034"
 msgid "Browser of choice"
 msgstr "Επιλογή φυλλομετρητή"
+
+msgctxt "#30035"
+msgid "Show exit option"
+msgstr "Δείξε την επιλογή εξόδου"
 
 msgctxt "#30402
 msgid "Success"

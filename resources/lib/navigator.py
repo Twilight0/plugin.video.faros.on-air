@@ -144,6 +144,14 @@ class Indexer:
             }
         ]
 
+        if control.setting('show_exit_button') == 'false':
+            self.list = [d for d in self.list if d.get('action') != 'quit_kodi']
+        else: pass
+
+        if not control.condVisibility('System.Platform.Android'):
+            self.list = [d for d in self.list if d.get('action') != 'external_links']
+        else: pass
+
         for item in self.list:
             cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
             refresh_cm = {'title': 30022, 'query': {'action': 'refresh'}}
@@ -184,8 +192,6 @@ class Indexer:
             cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
             item.update({'cm': [cache_clear]})
 
-        if control.setting('force_view') == 'true':
-            control.set_view_mode('50')
         directory.add(self.list)
 
     def playlist(self, url):
@@ -270,7 +276,7 @@ class Indexer:
             }
         ]
 
-        if control.setting('external_links') == 'false':
+        if control.setting('external_action') == 'false':
 
             links = [i['url'] for i in self.data]
             titles = [i['title'] for i in self.data]

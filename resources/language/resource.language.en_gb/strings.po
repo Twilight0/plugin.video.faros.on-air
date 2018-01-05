@@ -135,7 +135,7 @@ msgid "Our Website"
 msgstr ""
 
 msgctxt "#30031"
-msgid "Force list view for videos"
+msgid ""
 msgstr ""
 
 msgctxt "#30032"
@@ -148,6 +148,10 @@ msgstr ""
 
 msgctxt "#30034"
 msgid "Browser of choice"
+msgstr ""
+
+msgctxt "#30035"
+msgid "Show exit option"
 msgstr ""
 
 msgctxt "#30402

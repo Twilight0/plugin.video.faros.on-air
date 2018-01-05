@@ -89,7 +89,6 @@ def weather_set_up():
         f.write(addon_settings)
 
     set_a_setting('weather.addon', 'weather.yahoo')
-    set_a_setting('weather.currentlocation', 1)
     control.execute('Weather.Refresh')
 
 
@@ -165,10 +164,9 @@ def check_updates():
 
 def checkpoint():
 
-    if control.setting('first_time') == 'true':
+    if control.setting('first_time') == 'true' and 'CEMC' in control.infoLabel('System.FriendlyName'):
 
         control.setSetting('first_time', 'false')
-        set_a_setting('general.settinglevel', 3)
         set_a_setting('locale.keyboardlayouts', ['English QWERTY', 'Greek QWERTY'])
         weather_set_up()
         youtube_set_up()
