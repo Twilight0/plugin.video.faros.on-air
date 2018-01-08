@@ -55,7 +55,7 @@ msgid "Science"
 msgstr ""
 
 msgctxt "#30011"
-msgid ""
+msgid "Add to bookmarks"
 msgstr ""
 
 msgctxt "#30012"
@@ -67,7 +67,7 @@ msgid "Bookmarks"
 msgstr ""
 
 msgctxt "#30014"
-msgid ""
+msgid "Remove from bookmarks"
 msgstr ""
 
 msgctxt "#30015"

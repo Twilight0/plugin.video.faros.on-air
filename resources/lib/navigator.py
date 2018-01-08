@@ -18,10 +18,11 @@
         along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
+import json
 from base64 import b64decode
-from tulip import control, directory, youtube, cache, cleantitle
+from tulip import control, directory, youtube, cache, cleantitle, bookmarks
 from tulip.init import syshandle, sysaddon
-from helpers import checkpoint, android_activity
+from helpers import checkpoint, android_activity, get_weather_bool
 
 
 class Indexer:
@@ -109,7 +110,7 @@ class Indexer:
             ,
             {
                 'title': control.lang(30013),
-                'action': 'favourites',
+                'action': 'favourites' if 'CEMC' in control.infoLabel('System.FriendlyName') else 'bookmarks',
                 'icon': 'favourites.png'
             }
             ,
@@ -152,6 +153,10 @@ class Indexer:
             self.list = [d for d in self.list if d.get('action') != 'external_links']
         else: pass
 
+        if not get_weather_bool()[0] and not get_weather_bool()[1]:
+            self.list = [d for d in self.list if d.get('action') != 'weather']
+        else: pass
+
         for item in self.list:
             cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
             refresh_cm = {'title': 30022, 'query': {'action': 'refresh'}}
@@ -162,6 +167,24 @@ class Indexer:
         directory.add(self.list, content='videos')
         control.wait(1)
         checkpoint()
+
+    def bookmarks(self):
+
+        self.list = bookmarks.get()
+
+        if not self.list:
+            na = [{'title': 30016, 'action': None, 'icon': 'open-box.png'}]
+            directory.add(na)
+            return
+
+        for item in self.list:
+            bookmark = dict((k, v) for k, v in item.iteritems() if not k == 'next')
+            bookmark['delbookmark'] = item['url']
+            item.update({'cm': [{'title': 30014, 'query': {'action': 'deleteBookmark', 'url': json.dumps(bookmark)}}]})
+
+        self.list = sorted(self.list, key=lambda k: k['title'].lower())
+
+        directory.add(self.list)
 
     def video_list(self):
 
@@ -189,8 +212,11 @@ class Indexer:
             return
 
         for item in self.list:
+            bookmark = dict((k, v) for k, v in item.iteritems() if not k == 'next')
+            bookmark['bookmark'] = item['url']
+            bm_cm = {'title': 30011, 'query': {'action': 'addBookmark', 'url': json.dumps(bookmark)}}
             cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
-            item.update({'cm': [cache_clear]})
+            item.update({'cm': [cache_clear, bm_cm]})
 
         directory.add(self.list)
 
@@ -202,11 +228,12 @@ class Indexer:
             return
 
         for item in self.list:
+            bookmark = dict((k, v) for k, v in item.iteritems() if not k == 'next')
+            bookmark['bookmark'] = item['url']
+            bm_cm = {'title': 30011, 'query': {'action': 'addBookmark', 'url': json.dumps(bookmark)}}
             cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
-            item.update({'cm': [cache_clear]})
+            item.update({'cm': [cache_clear, bm_cm]})
 
-        if control.setting('force_view') == 'true':
-            control.set_view_mode('50')
         directory.add(self.list)
 
     def search(self):
@@ -228,8 +255,11 @@ class Indexer:
             return
 
         for item in self.list:
+            bookmark = dict((k, v) for k, v in item.iteritems() if not k == 'next')
+            bookmark['bookmark'] = item['url']
+            bm_cm = {'title': 30011, 'query': {'action': 'addBookmark', 'url': json.dumps(bookmark)}}
             cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
-            item.update({'action': 'play', 'isFolder': 'False', 'cm': [cache_clear]})
+            item.update({'cm': [cache_clear, bm_cm]})
 
         self.list = sorted(self.list, key=lambda k: k['title'].lower())
 

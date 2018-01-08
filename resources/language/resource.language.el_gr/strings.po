@@ -55,8 +55,8 @@ msgid "Science"
 msgstr "Επιστημονικά"
 
 msgctxt "#30011"
-msgid ""
-msgstr ""
+msgid "Add to bookmarks"
+msgstr "Προσθήκη στους σελιδοδείκτες"
 
 msgctxt "#30012"
 msgid "Tools"
@@ -67,8 +67,8 @@ msgid "Bookmarks"
 msgstr "Σελιδοδείκτες"
 
 msgctxt "#30014"
-msgid ""
-msgstr ""
+msgid "Remove from bookmarks"
+msgstr "Αφαίρεση από τους σελιδοδείκτες"
 
 msgctxt "#30015"
 msgid "Clear function cache"

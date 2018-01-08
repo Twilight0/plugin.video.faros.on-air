@@ -79,3 +79,15 @@ elif action == 'weather':
 elif action == 'favourites':
     from tulip import control
     control.execute('ActivateWindow(favourites,return)')
+
+elif action == 'bookmarks':
+    from resources.lib import navigator
+    navigator.Indexer().bookmarks()
+
+elif action == 'addBookmark':
+    from tulip import bookmarks
+    bookmarks.add(url)
+
+elif action == 'deleteBookmark':
+    from tulip import bookmarks
+    bookmarks.delete(url)

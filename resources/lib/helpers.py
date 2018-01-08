@@ -19,6 +19,29 @@
 '''
 
 from tulip import control, cache
+from tulip.client import parseDOM
+
+
+def get_weather_bool():
+
+    try:
+
+        guisettings_xml = control.transPath('special://profile/guisettings.xml')
+        with open(guisettings_xml) as f: gui_xml = f.read()
+        addon_used = parseDOM(gui_xml, 'addon')[0]
+        addon_bool = True if addon_used == 'weather.yahoo' else False
+    
+        yahoo_settings_xml = control.transPath('special://profile/addon_data/weather.yahoo/settings.xml')
+        with open(yahoo_settings_xml) as f: yahoo_xml = f.read()
+        city = parseDOM(yahoo_xml, 'setting', attrs={'id': 'Location1'})[0]
+        city_bool = True if 'Paphos' in city else False
+
+        return addon_bool, city_bool
+
+    except:
+
+        bools = False, False
+        return bools
 
 
 def quit_kodi():
