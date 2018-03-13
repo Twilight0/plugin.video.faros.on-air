@@ -58,6 +58,16 @@ def set_a_setting(setting, value):
     control.json_rpc(json_cmd)
 
 
+def bool_skin_setting(setting_id):
+
+    return bool(control.condVisibility('Skin.HasSetting({0})'.format(setting_id)))
+
+
+def set_skin_setting(setting_id, state='true'):
+
+    return control.execute('Skin.SetBool({0},{1})'.format(setting_id, state))
+
+
 def lang_choice():
 
     def set_other_options():
@@ -77,9 +87,11 @@ def lang_choice():
 
     if dialog == 0:
         set_a_setting('locale.language', 'resource.language.en_gb')
+        set_a_setting('locale.country', 'Central Europe')
         set_other_options()
     elif dialog == 1:
         set_a_setting('locale.language', 'resource.language.el_gr')
+        set_a_setting('locale.country', 'Ελλάδα')
         set_other_options()
     else:
         control.execute('Dialog.Close(all)')
@@ -117,10 +129,10 @@ def weather_set_up():
 
 def key_map_setup():
 
-    if control.exists(control.transPath('special://home/addons/plugin.video.faros.on-air.standalone/addon.xml')):
-        script_location = 'special://home/addons/plugin.video.faros.on-air.standalone/resources/lib/key_nav.py'
+    if control.exists(control.transPath('special://home/addons/plugin.video.faros.on-air/addon.xml')):
+        script_location = 'special://home/addons/plugin.video.faros.on-air/resources/lib/key_nav.py'
     else:
-        script_location = 'special://xbmc/addons/plugin.video.faros.on-air.standalone/resources/lib/key_nav.py'
+        script_location = 'special://xbmc/addons/plugin.video.faros.on-air/resources/lib/key_nav.py'
 
     xml = '''<keymap>
     <global>
@@ -194,25 +206,50 @@ def checkpoint():
         weather_set_up()
         youtube_set_up()
         key_map_setup()
-        lang_choice()
-        control.okDialog(heading=control.addonInfo('name'), line1=control.lang(30024))
+
+        if not bool_skin_setting('AutoScroll'):
+            set_skin_setting('AutoScroll')
+        if bool_skin_setting('HomeMenuNoMusicButton'):
+            set_skin_setting('HomeMenuNoMusicButton', 'false')
+        if bool_skin_setting('HomeMenuNoPVRRadioButton'):
+            set_skin_setting('HomeMenuNoPVRRadioButton', 'false')
+        if bool_skin_setting('HomeMenuNoPVRTVButton'):
+            set_skin_setting('HomeMenuNoPVRTVButton', 'false')
+        if bool_skin_setting('HomeMenuNoWeatherButton'):
+            set_skin_setting('HomeMenuNoWeatherButton', 'false')
+        if bool_skin_setting('HomeMenuNoPicturesButton'):
+            set_skin_setting('HomeMenuNoWeatherButton', 'false')
+        if not bool_skin_setting('homepageWeatherinfo'):
+            set_skin_setting('homepageWeatherinfo')
+        if not bool_skin_setting('RemoveFloorGraphics'):
+            set_skin_setting('RemoveFloorGraphics')
+        if not bool_skin_setting('HomepageHideSearchButton'):
+            set_skin_setting('HomepageHideSearchButton')
+        if not bool_skin_setting('ViewTypesSimplicity'):
+            set_skin_setting('ViewTypesSimplicity')
+        if not bool_skin_setting('HomepageHideSearchButton'):
+            set_skin_setting('HomepageHideSearchButton')
+
+        # lang_choice()
+        # control.okDialog(heading=control.addonInfo('name'), line1=control.lang(30024))
 
     else:
-
         pass
 
 
 def android_activity(url):
 
     if control.setting('browser') == 'Opera Mobile':
-        browser = 'com.opera.browser'
+        browser = '"com.opera.browser"'
     elif control.setting('browser') == 'Opera Mini':
-        browser = 'com.opera.mini.native'
+        browser = '"com.opera.mini.native"'
     elif control.setting('browser') == 'Firefox':
-        browser = 'org.mozilla.firefox'
+        browser = '"org.mozilla.firefox"'
     elif control.setting('browser') == 'UC Browser':
-        browser = 'com.UCMobile.intl'
+        browser = '"com.UCMobile.intl"'
+    elif control.setting('browser') == 'Chrome':
+        browser = '"com.android.chrome"'
     else:
-        browser = 'com.android.chrome'
+        browser = ''
 
-    control.execute('StartAndroidActivity("{0}","android.intent.action.VIEW","","{1}")'.format(browser, url))
+    control.execute('StartAndroidActivity({0},"android.intent.action.VIEW","","{1}")'.format(browser, url))
