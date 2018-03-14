@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.faros.on-air" name="Faros On-Air" version="1.0.3" provider-name="Twilight0">
+<addon id="plugin.video.faros.on-air" name="Faros On-Air" version="1.0.4" provider-name="Twilight0">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
         <import addon="plugin.video.youtube" version="5.4.5"/>
@@ -31,11 +31,6 @@
             <!--<datadir zip="true">https://raw.githubusercontent.com/Twilight0/repo.twilight0.libs/master/_zips/</datadir>-->
         <!--</dir>-->
     <!--</extension>-->
-    <news>
-08-01-2018 - [B]1.0.3[/B]
-- Re-applied bookmarks function for non-standalone setups
-- Navigator function root menu tweaks
-- Various icon optimizations
-- Cosmetics
-    </news>
+    <news>14-03-2018 - [B]1.0.4[/B]
+- Various enhancements</news>
 </addon>

@@ -1,6 +1,5 @@
-12-01-2018 - [B]1.0.4[/B]
-- Addon: Set region according to language
-- Skin: Set options according to current state on every fresh start
+14-03-2018 - [B]1.0.4[/B]
+- Various enhancements
 
 08-01-2018 - [B]1.0.3[/B]
 - Re-applied bookmarks function for non-standalone setups
