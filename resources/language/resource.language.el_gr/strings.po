@@ -154,6 +154,18 @@ msgctxt "#30035"
 msgid "Show exit option"
 msgstr "Δείξε την επιλογή εξόδου"
 
+msgctxt "#30036"
+msgid "Radio"
+msgstr "Ραδιόφωνο"
+
+msgctxt "#30037"
+msgid "Presentation"
+msgstr "Παρουσίαση"
+
+msgctxt "#30038"
+msgid "Downloading slideshow"
+msgstr "Μεταφόρτωση διαφανιών"
+
 msgctxt "#30402
 msgid "Success"
 msgstr "Επιτυχία"

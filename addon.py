@@ -76,6 +76,10 @@ elif action == 'weather':
     from resources.lib import helpers
     helpers.weather()
 
+elif action == 'presentation':
+    from resources.lib import helpers
+    helpers.presentation()
+
 elif action == 'favourites':
     from tulip import control
     control.execute('ActivateWindow(favourites,return)')

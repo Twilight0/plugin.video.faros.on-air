@@ -154,6 +154,18 @@ msgctxt "#30035"
 msgid "Show exit option"
 msgstr ""
 
+msgctxt "#30036"
+msgid "Radio"
+msgstr ""
+
+msgctxt "#30037"
+msgid "Presentation"
+msgstr ""
+
+msgctxt "#30038"
+msgid "Downloading slideshow"
+msgstr ""
+
 msgctxt "#30402
 msgid "Success"
 msgstr ""

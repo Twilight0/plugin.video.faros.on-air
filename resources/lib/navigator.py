@@ -20,9 +20,10 @@
 
 import json
 from base64 import b64decode
-from tulip import control, directory, youtube, cache, cleantitle, bookmarks
+from tulip import control, directory, cache, cleantitle, bookmarks, youtube
 from tulip.init import syshandle, sysaddon
 from helpers import checkpoint, android_activity, get_weather_bool
+# import youtube_requests
 
 
 class Indexer:
@@ -34,6 +35,7 @@ class Indexer:
         self.main_playlist_id = 'UUfU04d4DbqpyotwfgxRS6EQ'
         self.yt_key = b64decode('QUl6YVN5QThrMU95TEdmMDNIQk5sMGJ5RDUxMWpyOWNGV28yR1I0')  # please do not copy this key
         self.live_url = 'http://master.cystreams.com:25461/live/faros/farostv/154.m3u8'
+        self.radio_url = 'http://176.31.183.51:8300'
 
     def root(self):
 
@@ -44,6 +46,15 @@ class Indexer:
                 'isFolder': 'False',
                 'url': self.live_url,
                 'icon': 'live.jpg'
+            }
+            ,
+            {
+                'title': control.lang(30036),
+                'action': 'play',
+                'isFolder': 'False',
+                'url': self.radio_url,
+                'icon': 'radio.png',
+                'fanart': control.join(control.addonPath, 'resources', 'media', 'bgradio.jpg')
             }
             ,
             {
@@ -130,6 +141,12 @@ class Indexer:
                 'title': control.lang(30032),
                 'action': 'external_links',
                 'icon': 'external.png'
+            }
+            ,
+            {
+                'title': control.lang(30037),
+                'action': 'presentation',
+                'icon': control.addonInfo('icon')
             }
             ,
             {

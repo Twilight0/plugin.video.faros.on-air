@@ -18,7 +18,7 @@
         along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from tulip import control, cache
+from tulip import control, cache, client
 from tulip.client import parseDOM
 
 
@@ -199,10 +199,10 @@ def check_updates():
 
 def checkpoint():
 
-    if control.setting('first_time') == 'true' and 'CEMC' in control.infoLabel('System.FriendlyName'):
+    if control.setting('first_time') == 'true' and 'CEMC' in control.infoLabel('System.FriendlyName') and control.exists(control.transPath('special://xbmc/addons/plugin.video.faros.on-air/')):
 
-        control.setSetting('first_time', 'false')
         set_a_setting('locale.keyboardlayouts', ['English QWERTY', 'Greek QWERTY'])
+
         weather_set_up()
         youtube_set_up()
         key_map_setup()
@@ -233,6 +233,8 @@ def checkpoint():
         # lang_choice()
         # control.okDialog(heading=control.addonInfo('name'), line1=control.lang(30024))
 
+        control.setSetting('first_time', 'false')
+
     else:
         pass
 
@@ -253,3 +255,24 @@ def android_activity(url):
         browser = ''
 
     control.execute('StartAndroidActivity({0},"android.intent.action.VIEW","","{1}")'.format(browser, url))
+
+
+def presentation():
+
+    path = control.transPath('special://profile/addon_data/{0}/slideshow/'.format(control.addonInfo('id')))
+
+    if not control.exists(control.join(path, '01.jpg')):
+
+        control.makeFiles(path)
+
+        control.idle()
+
+        dp = control.ProgressDialog(heading=control.name())
+
+        for i in range(1, 25):
+            dp.update((i + 1) * 4, line1=control.lang(30038))
+            client.retriever('http://mediaportal.anacon.org/faros/{0}.jpg'.format(str(i) if len(str(i)) >= 2 else str('0' + str(i))), control.join(path, (str(i) if len(str(i)) >= 2 else str('0' + str(i))) + '.jpg'))
+
+        control.execute('Dialog.Close(progressdialog)')
+
+    control.execute('SlideShow({0},pause)'.format(path))
