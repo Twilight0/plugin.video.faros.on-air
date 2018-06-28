@@ -29,12 +29,12 @@ def get_weather_bool():
         guisettings_xml = control.transPath('special://profile/guisettings.xml')
         with open(guisettings_xml) as f: gui_xml = f.read()
         addon_used = parseDOM(gui_xml, 'addon')[0]
-        addon_bool = True if addon_used == 'weather.yahoo' else False
+        addon_bool = addon_used == 'weather.yahoo'
     
         yahoo_settings_xml = control.transPath('special://profile/addon_data/weather.yahoo/settings.xml')
         with open(yahoo_settings_xml) as f: yahoo_xml = f.read()
         city = parseDOM(yahoo_xml, 'setting', attrs={'id': 'Location1'})[0]
-        city_bool = True if 'Paphos' in city else False
+        city_bool = 'Paphos' in city
 
         return addon_bool, city_bool
 
@@ -199,7 +199,11 @@ def check_updates():
 
 def checkpoint():
 
-    if control.setting('first_time') == 'true' and 'CEMC' in control.infoLabel('System.FriendlyName') and control.exists(control.transPath('special://xbmc/addons/plugin.video.faros.on-air/')):
+    if control.setting(
+            'first_time'
+    ) == 'true' and 'CEMC' in control.infoLabel(
+        'System.FriendlyName'
+    ) and control.exists(control.transPath('special://xbmc/addons/plugin.video.faros.on-air/')):
 
         set_a_setting('locale.keyboardlayouts', ['English QWERTY', 'Greek QWERTY'])
 
@@ -271,7 +275,10 @@ def presentation():
 
         for i in range(1, 25):
             dp.update((i + 1) * 4, line1=control.lang(30038))
-            client.retriever('http://mediaportal.anacon.org/faros/{0}.jpg'.format(str(i) if len(str(i)) >= 2 else str('0' + str(i))), control.join(path, (str(i) if len(str(i)) >= 2 else str('0' + str(i))) + '.jpg'))
+            client.retriever(
+                'http://mediaportal.anacon.org/faros/{0}.jpg'.format(str(i) if len(str(i)) >= 2 else str('0' + str(i))),
+                control.join(path, (str(i) if len(str(i)) >= 2 else str('0' + str(i))) + '.jpg')
+            )
 
         control.execute('Dialog.Close(progressdialog)')
 

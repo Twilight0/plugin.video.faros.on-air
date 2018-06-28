@@ -22,7 +22,7 @@ import json
 from base64 import b64decode
 from tulip import control, directory, cache, cleantitle, bookmarks, youtube
 from tulip.init import syshandle, sysaddon
-from helpers import checkpoint, android_activity, get_weather_bool
+from helpers import checkpoint, get_weather_bool
 # import youtube_requests
 
 
@@ -166,10 +166,6 @@ class Indexer:
             self.list = [d for d in self.list if d.get('action') != 'quit_kodi']
         else: pass
 
-        if not control.condVisibility('System.Platform.Android'):
-            self.list = [d for d in self.list if d.get('action') != 'external_links']
-        else: pass
-
         if not get_weather_bool()[0] and not get_weather_bool()[1]:
             self.list = [d for d in self.list if d.get('action') != 'weather']
         else: pass
@@ -205,7 +201,7 @@ class Indexer:
 
     def video_list(self):
 
-        self.list = youtube.youtube(key=self.yt_key).videos(self.main_youtube_id)
+        self.list = youtube.youtube(key=self.yt_key).videos(self.main_youtube_id, limit=10)
 
         for item in self.list:
             item.update({'action': 'play', 'isFolder': 'False'})
@@ -214,7 +210,7 @@ class Indexer:
 
     def yt_playlist(self, pid):
 
-        self.list = youtube.youtube(key=self.yt_key).playlist(pid)
+        self.list = youtube.youtube(key=self.yt_key).playlist(pid, limit=10)
 
         for item in self.list:
             item.update({'action': 'play', 'isFolder': 'False'})
@@ -289,35 +285,35 @@ class Indexer:
         self.data = [
             {
                 'title': control.lang(30030),
-                'action': 'android_activity',
+                'action': 'open_website',
                 'icon': control.addonInfo('icon'),
                 'url': 'https://farosonair.com/'
             }
             ,
             {
                 'title': control.lang(30028),
-                'action': 'android_activity',
+                'action': 'open_website',
                 'icon': 'facebook.png',
                 'url': 'https://www.facebook.com/farosonair'
             }
             ,
             {
                 'title': control.lang(30029),
-                'action': 'android_activity',
+                'action': 'open_website',
                 'icon': 'instagram.png',
                 'url': 'https://www.instagram.com/farosonair16/'
             }
             ,
             {
                 'title': control.lang(30026),
-                'action': 'android_activity',
+                'action': 'open_website',
                 'icon': 'twitter.png',
                 'url': 'https://twitter.com/faros_on_air'
             }
             ,
             {
                 'title': control.lang(30027),
-                'action': 'android_activity',
+                'action': 'open_website',
                 'icon': 'youtube_sub.png',
                 'url': 'https://www.youtube.com/channel/UCfU04d4DbqpyotwfgxRS6EQ?sub_confirmation=1'
             }
@@ -331,8 +327,12 @@ class Indexer:
             choice = control.selectDialog(titles)
 
             if choice >= 0:
-
-                android_activity(links[choice])
+                if control.condVisibility('System.Platform.Android'):
+                    from helpers import android_activity
+                    android_activity(links[choice])
+                else:
+                    import webbrowser
+                    webbrowser.open(links[choice])
 
             else:
 

@@ -68,9 +68,14 @@ elif action == 'check_updates':
     from resources.lib import helpers
     helpers.check_updates()
 
-elif action == 'android_activity':
-    from resources.lib import helpers
-    helpers.android_activity(url)
+elif action == 'open_website':
+    from tulip.control import condVisibility
+    if condVisibility('System.Platform.Android'):
+        from resources.lib import helpers
+        helpers.android_activity(url)
+    else:
+        import webbrowser
+        webbrowser.open(url)
 
 elif action == 'weather':
     from resources.lib import helpers
