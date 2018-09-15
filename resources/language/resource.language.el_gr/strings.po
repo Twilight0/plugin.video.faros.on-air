@@ -166,6 +166,14 @@ msgctxt "#30038"
 msgid "Downloading slideshow"
 msgstr "Μεταφόρτωση διαφανιών"
 
+msgctxt "#30039"
+msgid "Faros stream #1"
+msgstr "Ροή Φάρου #1"
+
+msgctxt "#30040"
+msgid "Faros stream #2"
+msgstr "Ροή Φάρου #2"
+
 msgctxt "#30402
 msgid "Success"
 msgstr "Επιτυχία"

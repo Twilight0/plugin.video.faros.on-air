@@ -1,3 +1,7 @@
+15-09-2018 - [B]1.1.0[/B]
+- Added the second live stream from Faros
+- New nested menu for choosing Faros live stream
+
 23-03-2018 - [B]1.0.5[/B]
 - Improved conditional for first time setup
 - Added radio and presentation options

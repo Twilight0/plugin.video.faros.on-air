@@ -32,6 +32,10 @@ elif action == 'videos':
     from resources.lib import navigator
     navigator.Indexer().videos()
 
+elif action == 'live':
+    from resources.lib import navigator
+    navigator.Indexer().live()
+
 elif action == 'play':
     from resources.lib import player
     player.play(url)

@@ -35,6 +35,7 @@ class Indexer:
         self.main_playlist_id = 'UUfU04d4DbqpyotwfgxRS6EQ'
         self.yt_key = b64decode('QUl6YVN5QThrMU95TEdmMDNIQk5sMGJ5RDUxMWpyOWNGV28yR1I0')  # please do not copy this key
         self.live_url = 'http://master.cystreams.com:25461/live/faros/farostv/154.m3u8'
+        self.live_url_2 = 'http://master.cystreams.com:25461/live/faros/farostv/1866.m3u8'
         self.radio_url = 'http://176.31.183.51:8300'
 
     def root(self):
@@ -42,9 +43,7 @@ class Indexer:
         self.list = [
             {
                 'title': control.lang(30001),
-                'action': 'play',
-                'isFolder': 'False',
-                'url': self.live_url,
+                'action': 'live',
                 'icon': 'live.jpg'
             }
             ,
@@ -180,6 +179,28 @@ class Indexer:
         directory.add(self.list, content='videos')
         control.wait(1)
         checkpoint()
+
+    def live(self):
+
+        self.list = [
+            {
+                'title': control.lang(30039),
+                'action': 'play',
+                'isFolder': 'False',
+                'url': self.live_url,
+                'icon': 'live.jpg'
+            }
+            ,
+            {
+                'title': control.lang(30040),
+                'action': 'play',
+                'isFolder': 'False',
+                'url': self.live_url_2,
+                'icon': 'live.jpg'
+            }
+        ]
+
+        directory.add(self.list)
 
     def bookmarks(self):
 

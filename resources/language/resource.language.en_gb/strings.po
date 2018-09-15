@@ -166,6 +166,14 @@ msgctxt "#30038"
 msgid "Downloading slideshow"
 msgstr ""
 
+msgctxt "#30039"
+msgid "Faros stream #1"
+msgstr ""
+
+msgctxt "#30040"
+msgid "Faros stream #2"
+msgstr ""
+
 msgctxt "#30402
 msgid "Success"
 msgstr ""
