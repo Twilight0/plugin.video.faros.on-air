@@ -135,7 +135,7 @@ msgid "Our Website"
 msgstr ""
 
 msgctxt "#30031"
-msgid ""
+msgid "News"
 msgstr ""
 
 msgctxt "#30032"

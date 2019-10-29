@@ -135,8 +135,8 @@ msgid "Our Website"
 msgstr "Η ιστοσελίδα μας"
 
 msgctxt "#30031"
-msgid ""
-msgstr ""
+msgid "News"
+msgstr "Νέα"
 
 msgctxt "#30032"
 msgid "External links"

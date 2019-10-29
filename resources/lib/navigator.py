@@ -34,8 +34,8 @@ class Indexer:
         self.main_youtube_id = 'UCfU04d4DbqpyotwfgxRS6EQ'
         self.main_playlist_id = 'UUfU04d4DbqpyotwfgxRS6EQ'
         self.yt_key = b64decode('QUl6YVN5QThrMU95TEdmMDNIQk5sMGJ5RDUxMWpyOWNGV28yR1I0')  # please do not copy this key
-        self.live_url = 'http://master.cystreams.com:25461/live/faros/farostv/154.m3u8'
-        self.live_url_2 = 'http://master.cystreams.com:25461/live/faros/farostv/1866.m3u8'
+        self.live_url = 'https://s1.cystream.net/live/faros1/playlist.m3u8'
+        self.live_url_2 = 'https://s1.cystream.net/live/faros2/playlist.m3u8'
         self.radio_url = 'http://176.31.183.51:8300'
 
     def root(self):
@@ -145,31 +145,33 @@ class Indexer:
             {
                 'title': control.lang(30037),
                 'action': 'presentation',
-                'icon': control.addonInfo('icon')
+                'icon': control.addonInfo('icon'),
+                'isFolder': 'False', 'isPlayable': 'False'
             }
             ,
             {
                 'title': control.lang(30012),
                 'action': 'settings',
                 'icon': 'settings.png',
+                'isFolder': 'False', 'isPlayable': 'False'
             }
             ,
             {
                 'title': control.lang(30018),
                 'action': 'quit_kodi',
                 'icon': 'quit.png',
+                'isFolder': 'False', 'isPlayable': 'False'
             }
         ]
 
         if control.setting('show_exit_button') == 'false':
             self.list = [d for d in self.list if d.get('action') != 'quit_kodi']
-        else: pass
 
         if not get_weather_bool()[0] and not get_weather_bool()[1]:
             self.list = [d for d in self.list if d.get('action') != 'weather']
-        else: pass
 
         for item in self.list:
+
             cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
             refresh_cm = {'title': 30022, 'query': {'action': 'refresh'}}
             item.update({'cm': [cache_clear, refresh_cm]})
@@ -306,39 +308,43 @@ class Indexer:
         self.data = [
             {
                 'title': control.lang(30030),
-                'action': 'open_website',
                 'icon': control.addonInfo('icon'),
                 'url': 'https://farosonair.com/'
             }
             ,
             {
+                'title': control.lang(30031),
+                'icon': control.addonInfo('icon'),
+                'url': 'https://farosonair.com/category/farosnews/'
+            }
+            ,
+            {
                 'title': control.lang(30028),
-                'action': 'open_website',
                 'icon': 'facebook.png',
                 'url': 'https://www.facebook.com/farosonair'
             }
             ,
             {
                 'title': control.lang(30029),
-                'action': 'open_website',
                 'icon': 'instagram.png',
                 'url': 'https://www.instagram.com/farosonair16/'
             }
             ,
             {
                 'title': control.lang(30026),
-                'action': 'open_website',
                 'icon': 'twitter.png',
                 'url': 'https://twitter.com/faros_on_air'
             }
             ,
             {
                 'title': control.lang(30027),
-                'action': 'open_website',
                 'icon': 'youtube_sub.png',
                 'url': 'https://www.youtube.com/channel/UCfU04d4DbqpyotwfgxRS6EQ?sub_confirmation=1'
             }
         ]
+
+        for i in self.data:
+            i.update({'action': 'open_website'})
 
         if control.setting('external_action') == 'false':
 
