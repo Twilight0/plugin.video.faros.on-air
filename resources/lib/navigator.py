@@ -22,8 +22,8 @@ import json
 from base64 import b64decode
 from tulip import control, directory, cache, cleantitle, bookmarks, youtube
 from tulip.init import syshandle, sysaddon
-from helpers import checkpoint, get_weather_bool
-# import youtube_requests
+from tulip.compat import iteritems
+from resources.lib.helpers import checkpoint, get_weather_bool
 
 
 class Indexer:
@@ -33,7 +33,7 @@ class Indexer:
         self.list = []; self.data = []
         self.main_youtube_id = 'UCfU04d4DbqpyotwfgxRS6EQ'
         self.main_playlist_id = 'UUfU04d4DbqpyotwfgxRS6EQ'
-        self.yt_key = b64decode('QUl6YVN5QThrMU95TEdmMDNIQk5sMGJ5RDUxMWpyOWNGV28yR1I0')  # please do not copy this key
+        self.yt_key = b64decode('QUl6YVN5RGhYQ3FiX1VGZFQ4Q3ZUUEZsUktTc1dERm1PdzlxVHBN')  # please do not copy this key
         self.live_url = 'https://s1.cystream.net/live/faros1/playlist.m3u8'
         self.live_url_2 = 'https://s1.cystream.net/live/faros2/playlist.m3u8'
         self.radio_url = 'http://176.31.183.51:8300'
@@ -214,7 +214,7 @@ class Indexer:
             return
 
         for item in self.list:
-            bookmark = dict((k, v) for k, v in item.iteritems() if not k == 'next')
+            bookmark = dict((k, v) for k, v in iteritems(item) if not k == 'next')
             bookmark['delbookmark'] = item['url']
             item.update({'cm': [{'title': 30014, 'query': {'action': 'deleteBookmark', 'url': json.dumps(bookmark)}}]})
 
@@ -248,7 +248,7 @@ class Indexer:
             return
 
         for item in self.list:
-            bookmark = dict((k, v) for k, v in item.iteritems() if not k == 'next')
+            bookmark = dict((k, v) for k, v in iteritems(item) if not k == 'next')
             bookmark['bookmark'] = item['url']
             bm_cm = {'title': 30011, 'query': {'action': 'addBookmark', 'url': json.dumps(bookmark)}}
             cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
@@ -264,7 +264,7 @@ class Indexer:
             return
 
         for item in self.list:
-            bookmark = dict((k, v) for k, v in item.iteritems() if not k == 'next')
+            bookmark = dict((k, v) for k, v in iteritems(item) if not k == 'next')
             bookmark['bookmark'] = item['url']
             bm_cm = {'title': 30011, 'query': {'action': 'addBookmark', 'url': json.dumps(bookmark)}}
             cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
@@ -291,7 +291,7 @@ class Indexer:
             return
 
         for item in self.list:
-            bookmark = dict((k, v) for k, v in item.iteritems() if not k == 'next')
+            bookmark = dict((k, v) for k, v in iteritems(item) if not k == 'next')
             bookmark['bookmark'] = item['url']
             bm_cm = {'title': 30011, 'query': {'action': 'addBookmark', 'url': json.dumps(bookmark)}}
             cache_clear = {'title': 30015, 'query': {'action': 'cache_clear'}}
@@ -355,7 +355,7 @@ class Indexer:
 
             if choice >= 0:
                 if control.condVisibility('System.Platform.Android'):
-                    from helpers import android_activity
+                    from resources.lib.helpers import android_activity
                     android_activity(links[choice])
                 else:
                     import webbrowser

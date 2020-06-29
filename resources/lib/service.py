@@ -21,14 +21,14 @@
 from xbmc import executebuiltin, translatePath, getInfoLabel
 from xbmcvfs import exists
 
-_id_ = 'plugin.video.faros.on-air'
+ID = 'plugin.video.faros.on-air'
 
 if 'CEMC' in getInfoLabel('System.FriendlyName'):
 
-    executebuiltin('RunAddon({0})'.format(_id_))
+    executebuiltin('RunAddon({0})'.format(ID))
 
     if exists(
-            translatePath('special://home/addons/{0}/addon.xml'.format(_id_))
+            translatePath('special://home/addons/{0}/addon.xml'.format(ID))
     ) and exists(
         translatePath('special://profile/keymaps/farosonair.xml')
     ):
@@ -39,7 +39,3 @@ if 'CEMC' in getInfoLabel('System.FriendlyName'):
         if 'home' not in keymap_file:
             with open(translatePath('special://profile/keymaps/farosonair.xml'), 'w') as f:
                 f.write(keymap_file.replace('xbmc', 'home'))
-
-else:
-
-    pass
