@@ -227,7 +227,7 @@ class Indexer:
         self.list = youtube.youtube(key=self.yt_key).videos(self.main_youtube_id, limit=10)
 
         for item in self.list:
-            item.update({'action': 'play', 'isFolder': 'False'})
+            item.update({'action': 'play', 'isFolder': 'False', 'title': cleantitle.replaceHTMLCodes(['title'])})
 
         return self.list
 
@@ -248,6 +248,7 @@ class Indexer:
             return
 
         for item in self.list:
+            item['title'] = cleantitle.replaceHTMLCodes(item['title'])
             bookmark = dict((k, v) for k, v in iteritems(item) if not k == 'next')
             bookmark['bookmark'] = item['url']
             bm_cm = {'title': 30011, 'query': {'action': 'addBookmark', 'url': json.dumps(bookmark)}}
@@ -264,6 +265,7 @@ class Indexer:
             return
 
         for item in self.list:
+            item['title'] = cleantitle.replaceHTMLCodes(item['title'])
             bookmark = dict((k, v) for k, v in iteritems(item) if not k == 'next')
             bookmark['bookmark'] = item['url']
             bm_cm = {'title': 30011, 'query': {'action': 'addBookmark', 'url': json.dumps(bookmark)}}
@@ -291,6 +293,7 @@ class Indexer:
             return
 
         for item in self.list:
+            item['title'] = cleantitle.replaceHTMLCodes(item['title'])
             bookmark = dict((k, v) for k, v in iteritems(item) if not k == 'next')
             bookmark['bookmark'] = item['url']
             bm_cm = {'title': 30011, 'query': {'action': 'addBookmark', 'url': json.dumps(bookmark)}}
