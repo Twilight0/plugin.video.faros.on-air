@@ -20,6 +20,7 @@
 
 import json
 from base64 import b64decode
+from zlib import decompress
 from tulip import control, directory, cache, cleantitle, bookmarks, youtube
 from tulip.init import syshandle, sysaddon
 from tulip.compat import iteritems
@@ -33,7 +34,11 @@ class Indexer:
         self.list = []; self.data = []
         self.main_youtube_id = 'UCfU04d4DbqpyotwfgxRS6EQ'
         self.main_playlist_id = 'UUfU04d4DbqpyotwfgxRS6EQ'
-        self.yt_key = b64decode('QUl6YVN5RGhYQ3FiX1VGZFQ4Q3ZUUEZsUktTc1dERm1PdzlxVHBN')  # please do not copy this key
+        self.scramble = (
+            'eJwVy80KgjAAAOBXkZ1TdCrTbmIhogVhYHUR24Yzl1ubP1n07uH9+75AU6zoALYGaNLkUJ6YyXEWeTebDZdsHqGHwcYAtWyrji4ri9JPXS'
+            'yxSooS7eTcPsg9z0O2XI/v86vak1HESPBgXS1ZA7Rtzw2RGyAfmRPjyPFdSBWRsCGOpoSzafJF1wVKt8SqpdRWI0TD6aipwqIfaD9YWDzB'
+            '7w/HIjj4'
+        )
         self.live_url = 'https://s1.cystream.net/live/faros1/playlist.m3u8'
         self.live_url_2 = 'https://s1.cystream.net/live/faros2/playlist.m3u8'
         self.radio_url = 'http://176.31.183.51:8300'
@@ -224,7 +229,9 @@ class Indexer:
 
     def video_list(self):
 
-        self.list = youtube.youtube(key=self.yt_key).videos(self.main_youtube_id, limit=10)
+        key = json.loads(decompress(b64decode(self.scramble)))['api_key']
+
+        self.list = youtube.youtube(key=key).videos(self.main_youtube_id, limit=10)
 
         for item in self.list:
             item.update({'action': 'play', 'isFolder': 'False', 'title': cleantitle.replaceHTMLCodes(['title'])})
@@ -233,7 +240,9 @@ class Indexer:
 
     def yt_playlist(self, pid):
 
-        self.list = youtube.youtube(key=self.yt_key).playlist(pid, limit=10)
+        key = json.loads(decompress(b64decode(self.scramble)))['api_key']
+
+        self.list = youtube.youtube(key=key).playlist(pid, limit=10)
 
         for item in self.list:
             item.update({'action': 'play', 'isFolder': 'False'})
