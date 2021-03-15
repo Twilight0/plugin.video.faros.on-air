@@ -26,6 +26,8 @@ from tulip.init import syshandle, sysaddon
 from tulip.compat import iteritems
 from resources.lib.helpers import checkpoint, get_weather_bool
 
+function_cache = cache.FunctionCache()
+
 
 class Indexer:
 
@@ -227,6 +229,7 @@ class Indexer:
 
         directory.add(self.list)
 
+    @function_cache.cache_method(3)
     def video_list(self):
 
         key = json.loads(decompress(b64decode(self.scramble)))['api_key']
@@ -234,10 +237,11 @@ class Indexer:
         self.list = youtube.youtube(key=key).videos(self.main_youtube_id, limit=10)
 
         for item in self.list:
-            item.update({'action': 'play', 'isFolder': 'False', 'title': cleantitle.replaceHTMLCodes(['title'])})
+            item.update({'action': 'play', 'isFolder': 'False', 'title': cleantitle.replaceHTMLCodes(item['title'])})
 
         return self.list
 
+    @function_cache.cache_method(3)
     def yt_playlist(self, pid):
 
         key = json.loads(decompress(b64decode(self.scramble)))['api_key']
@@ -251,7 +255,7 @@ class Indexer:
 
     def videos(self):
 
-        self.list = cache.get(self.video_list, 3)
+        self.list = self.video_list()
 
         if self.list is None:
             return
@@ -268,7 +272,7 @@ class Indexer:
 
     def playlist(self, url):
 
-        self.list = cache.get(self.yt_playlist, 3, url)
+        self.list = self.yt_playlist(url)
 
         if self.list is None:
             return
