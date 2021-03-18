@@ -23,10 +23,8 @@ from base64 import b64decode
 from zlib import decompress
 from tulip import control, directory, cache, cleantitle, bookmarks, youtube
 from tulip.init import syshandle, sysaddon
-from tulip.compat import iteritems
+from tulip.compat import iteritems, py3_dec
 from resources.lib.helpers import checkpoint, get_weather_bool
-
-function_cache = cache.FunctionCache()
 
 
 class Indexer:
@@ -229,10 +227,9 @@ class Indexer:
 
         directory.add(self.list)
 
-    @function_cache.cache_method(3)
     def video_list(self):
 
-        key = json.loads(decompress(b64decode(self.scramble)))['api_key']
+        key = json.loads(decompress(py3_dec(b64decode(self.scramble))))['api_key']
 
         self.list = youtube.youtube(key=key).videos(self.main_youtube_id, limit=10)
 
@@ -241,10 +238,9 @@ class Indexer:
 
         return self.list
 
-    @function_cache.cache_method(3)
     def yt_playlist(self, pid):
 
-        key = json.loads(decompress(b64decode(self.scramble)))['api_key']
+        key = json.loads(decompress(py3_dec(b64decode(self.scramble))))['api_key']
 
         self.list = youtube.youtube(key=key).playlist(pid, limit=10)
 
