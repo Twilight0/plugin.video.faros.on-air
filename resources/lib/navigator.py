@@ -26,6 +26,7 @@ from tulip.init import syshandle, sysaddon
 from tulip.compat import iteritems, py3_dec
 from resources.lib.helpers import checkpoint, get_weather_bool
 
+method_cache = cache.FunctionCache().cache_method
 
 class Indexer:
 
@@ -42,6 +43,7 @@ class Indexer:
         self.live_url = 'https://s1.cystream.net/live/faros1/playlist.m3u8'
         self.live_url_2 = 'https://s1.cystream.net/live/faros2/playlist.m3u8'
         self.radio_url = 'http://176.31.183.51:8300'
+        self.key = json.loads(decompress(py3_dec(b64decode(self.scramble))))['api_key']
 
     def root(self):
 
@@ -227,25 +229,30 @@ class Indexer:
 
         directory.add(self.list)
 
-    def video_list(self):
+    @method_cache(30)
+    def yt_videos(self):
 
-        key = json.loads(decompress(py3_dec(b64decode(self.scramble))))['api_key']
+        return youtube.youtube(key=self.key).videos(self.main_youtube_id, limit=10)
 
-        self.list = youtube.youtube(key=key).videos(self.main_youtube_id, limit=10)
-
-        for item in self.list:
-            item.update({'action': 'play', 'isFolder': 'False', 'title': cleantitle.replaceHTMLCodes(item['title'])})
-
-        return self.list
-
+    @method_cache(60)
     def yt_playlist(self, pid):
 
-        key = json.loads(decompress(py3_dec(b64decode(self.scramble))))['api_key']
-
-        self.list = youtube.youtube(key=key).playlist(pid, limit=10)
+        self.list = youtube.youtube(key=self.key).playlist(pid, limit=10)
 
         for item in self.list:
             item.update({'action': 'play', 'isFolder': 'False'})
+
+        return self.list
+
+    def video_list(self):
+
+        self.list = self.yt_videos()
+
+        if not self.list:
+            return
+
+        for item in self.list:
+            item.update({'action': 'play', 'isFolder': 'False', 'title': cleantitle.replaceHTMLCodes(item['title'])})
 
         return self.list
 
@@ -292,11 +299,18 @@ class Indexer:
             return
 
         self.list = self.video_list()
-        self.list = [
-            item for item in self.list if search_str.lower() in cleantitle.strip_accents(
-                item['title'].decode('utf-8')
-            ).lower()
-        ]
+        try:
+            self.list = [
+                item for item in self.list if search_str.lower() in cleantitle.strip_accents(
+                    item['title'].decode('utf-8')
+                ).lower()
+            ]
+        except Exception:
+            self.list = [
+                item for item in self.list if search_str.lower() in cleantitle.strip_accents(
+                    item['title']
+                ).lower()
+            ]
 
         if not self.list:
             return

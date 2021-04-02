@@ -3,7 +3,7 @@
     <requires>
         <import addon="xbmc.addon" version="16.1.000"/>
         <import addon="plugin.video.youtube" version="6.8.10"/>
-        <import addon="script.module.tulip" version="2.8.9"/>
+        <import addon="script.module.tulip" version="2.8.17"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="addon.py">
         <provides>video</provides>
@@ -20,7 +20,10 @@
         <size>738082</size>
         <website>https://farosonair.com/</website>
         <source>https://github.com/Twilight0/plugin.video.faros.on-air</source>
-        <news>18-03-2021 - [B]1.4.1[/B]
+        <news>02-04-2021 - [B]1.5.0[/B]
+- Revert 'revert function cache'
+
+18-03-2021 - [B]1.4.1[/B]
 - Revert function cache
 - Bug fixes
 

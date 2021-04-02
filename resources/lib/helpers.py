@@ -182,8 +182,7 @@ def refresh():
 
 def cache_clear():
 
-    cache.clear(withyes=False)
-    control.infoDialog(control.lang(30402))
+    cache.FunctionCache().reset_cache(notify=True)
 
 
 def weather():

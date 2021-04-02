@@ -1,5 +1,5 @@
 <settings>
-    <category label="General">
+    <category label="30041">
         <setting id="show_exit_button" label="30035" type="bool" default="true"/>
         <setting id="external_action" label="30033" type="bool" default="false"/>
         <setting id="browser" label="30034" type="select" values="Default|Chrome|Opera Mobile|Opera Mini|Firefox|UC Browser" default="Default"/>

@@ -174,6 +174,10 @@ msgctxt "#30040"
 msgid "Faros stream #2"
 msgstr ""
 
+msgctxt "#30041"
+msgid "General"
+msgstr ""
+
 msgctxt "#30402
 msgid "Success"
 msgstr ""
